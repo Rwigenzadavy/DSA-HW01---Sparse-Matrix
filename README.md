@@ -47,7 +47,16 @@ python main.py
 ```
 4. Select the operation (add, subtract, multiply)
 
-5. Choose two input files from the list
 
-6. Provide a name for the output file
+## The program will raise an error and exit if:
+
+-The input file contains malformed entries (e.g., wrong parentheses, float values)
+
+-The matrices are incompatible for the selected operation
+
+-Non-integer values are found where integers are expected
+
+6. Choose two input files from the list
+
+7. Provide a name for the output file
 
