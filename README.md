@@ -29,21 +29,19 @@ Only built-in os module used for listing files
 
 ## Folder Structure
 
+├── sample_inputs/ # Folder with input matrix files
+
 ├── main.py # Main runner program
 
 ├── sparse_matrix.py # SparseMatrix class
 
-├── sample_inputs/ # Folder with input matrix files
-|
-
 ##  How to Run
 
-1. Make sure Python is installed on your system.
+1. install python on your system.
    
 2. Clone the repository
     
 3. Run the main program:
-
 ```bash
 python main.py
 ```
