@@ -1,33 +1,45 @@
+import os
 from sparse_matrix import SparseMatrix
 
+def list_input_files(folder):
+    files = [f for f in os.listdir(folder) if f.endswith(".txt")]
+    return files
+
+def choose_file(files, prompt):
+    for i, f in enumerate(files):
+        print(f"{i + 1}. {f}")
+    choice = int(input(prompt)) - 1
+    return files[choice]
+
 def main():
-    print("Choose operation:\n1. Add\n2. Subtract\n3. Multiply")
-    choice = input("Enter 1, 2 or 3: ").strip()
+    input_folder = "sample_inputs"
+    input_files = list_input_files(input_folder)
 
-    file1 = input("Enter filename for matrix 1 (e.g., sample_inputs/matrix1.txt): ").strip()
-    file2 = input("Enter filename for matrix 2 (e.g., sample_inputs/matrix2.txt): ").strip()
-    output_file = input("Enter output filename (e.g., result.txt): ").strip()
+    print("Choose an operation:\n1. Add\n2. Subtract\n3. Multiply")
+    choice = input("Enter choice (1/2/3): ")
 
-    try:
-        m1 = SparseMatrix.from_file(file1)
-        m2 = SparseMatrix.from_file(file2)
+    print("\nAvailable input files:")
+    file1 = choose_file(input_files, "Enter number for first matrix file: ")
+    file2 = choose_file(input_files, "Enter number for second matrix file: ")
 
-        if choice == '1':
-            result = m1.add(m2)
-        elif choice == '2':
-            result = m1.subtract(m2)
-        elif choice == '3':
-            result = m1.multiply(m2)
-        else:
-            print("Invalid option")
-            return
+    matrix1 = SparseMatrix.from_file(os.path.join(input_folder, file1))
+    matrix2 = SparseMatrix.from_file(os.path.join(input_folder, file2))
 
-        with open(output_file, 'w') as f:
-            f.write(str(result))
-        print("Operation completed. Result saved to", output_file)
+    if choice == '1':
+        result = matrix1.add(matrix2)
+    elif choice == '2':
+        result = matrix1.subtract(matrix2)
+    elif choice == '3':
+        result = matrix1.multiply(matrix2)
+    else:
+        print("Invalid operation choice.")
+        return
 
-    except Exception as e:
-        print("Error:", e)
+    output_filename = input("Enter name for the output file (e.g. result.txt): ")
+    with open(output_filename, 'w') as f:
+        f.write(str(result))
+
+    print(f"\n✅ Operation completed. Result saved to {output_filename}.")
 
 if __name__ == "__main__":
     main()
